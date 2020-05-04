@@ -1,0 +1,57 @@
+<%--=========================================================================== 
+Header (top area). 
+===========================================================================--%>
+
+<%@ page import="ua.nure.razdobudkina.SummaryTask4.db.Role"%>
+<%@ include file="/WEB-INF/jspf/directive/page.jspf"%>
+<%@ include file="/WEB-INF/jspf/directive/taglib.jspf"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<nav aria-label="breadcrumb">
+			<ol class="breadcrumb   m-1">
+				<div class="dropdown">
+					<a class="btn btn-secondary dropdown-toggle float-right m-1" href="#"
+						role="button" id="dropdownMenuLink" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> <fmt:message key="sortedPanel.href.sorted" /> </a>
+
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<a class="dropdown-item" href="controller?command=listCourses&sorted=nameAsc"><fmt:message key="sortedPanel.href.nameAsc" /></a> 
+						<a class="dropdown-item" href="controller?command=listCourses&sorted=nameDesc"><fmt:message key="sortedPanel.href.nameDesc" /></a> 
+						<a class="dropdown-item" href="controller?command=listCourses&sorted=length"><fmt:message key="sortedPanel.href.length" /></a>
+						<c:if test="${userRole.name == 'admin' || userRole.name == 'teacher'}">
+						<a class="dropdown-item" href="controller?command=listCourses&sorted=countStudents"><fmt:message key="sortedPanel.href.countStudents" /></a>
+						</c:if>
+					</div>
+				</div>
+				<div class="dropdown">
+					<a class="btn btn-secondary dropdown-toggle float-right m-1" href="#"
+						role="button" id="dropdownMenuLink" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> <fmt:message key="sortedPanel.href.topic" /> </a>
+
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					<c:forEach var="category" items="${listCategories}">
+						<a class="dropdown-item" href="controller?command=listCourses&searchTopic=${category.getId()}">${category.getName()}</a> 
+					</c:forEach>
+					</div>
+				</div>
+				<div class="dropdown">
+					<a class="btn btn-secondary dropdown-toggle float-right m-1" href="#"
+						role="button" id="dropdownMenuLink" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> <fmt:message key="sortedPanel.href.teacher" /> </a>
+
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					<c:forEach var="teacher" items="${listTeachers}">
+						<a class="dropdown-item" href="controller?command=listCourses&searchTeacher=${teacher.getId()}">${teacher.getFullName()}</a> 
+					</c:forEach>
+					</div>
+				</div>
+				<c:if test="${userRole.name == 'admin'}">
+					<form action="controller" method="post">
+						<input type="hidden" name="command" value="addCourse" />
+						<button class="btn btn-success m-1" type="submit" value="editCourse"><fmt:message key="sortedPanel.button.add" /></button>
+					</form>
+				</c:if>
+			</ol>
+		</nav>
+
+

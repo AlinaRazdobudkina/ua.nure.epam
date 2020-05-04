@@ -1,0 +1,42 @@
+<%--=========================================================================== 
+Header (top area). 
+===========================================================================--%>
+
+<%@ page import="ua.nure.razdobudkina.SummaryTask4.db.Role"%>
+<%@ include file="/WEB-INF/jspf/directive/page.jspf"%>
+<%@ include file="/WEB-INF/jspf/directive/taglib.jspf"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<c:if test="${not empty user}">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link"
+					href="controller?command=listCourses"><fmt:message key="navbar.href.home" /><span class="sr-only">(current)</span></a>&nbsp;
+				</li>
+				<c:if test="${userRole.name == 'student'}">
+					<li class="nav-item"><a class="nav-link"
+						href="controller?command=listCoursesForStudent"><fmt:message key="navbar.href.myCourses" /></a></li>
+				</c:if>
+				<c:if test="${userRole.name == 'admin'}">
+					<li class="nav-item"><a
+						href="controller?command=listUsers&preCommand=students"
+						class="nav-link" href=""><fmt:message key="navbar.href.students" /></a></li>
+					<li class="nav-item"><a
+						href="controller?command=listUsers&preCommand=teachers"
+						class="nav-link" href=""><fmt:message key="navbar.href.teachers" /></a></li>
+				</c:if>
+			</ul>
+			<form class="form-inline my-2 my-lg-0">
+				<a href="controller?command=myAccount" class="nav-link" href="">
+				<fmt:message key="navbar.href.myAccount" /></a> 
+				<a href="controller?command=logout"
+					class="btn btn-outline-primary my-2 my-sm-0" type="button"><fmt:message key="navbar.href.logout" /></a>
+			</form>
+		</div>
+	</nav>
+</c:if>
+
+
+
+

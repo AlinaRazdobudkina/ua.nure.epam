@@ -1,0 +1,17 @@
+<%--=========================================================================== 
+Header (top area). 
+===========================================================================--%>
+
+<%@ page import="ua.nure.razdobudkina.SummaryTask4.db.Role"%>
+<%@ include file="/WEB-INF/jspf/directive/page.jspf"%>
+<%@ include file="/WEB-INF/jspf/directive/taglib.jspf"%>
+
+<tr>
+	<td id="header"><c:if test="${not empty user}">
+			<c:redirect url="controller?command=listCourses" />
+		</c:if>
+		 <c:if test="${empty user}">
+			<c:redirect url="login2.jsp" />
+		</c:if></td>
+</tr>
+
