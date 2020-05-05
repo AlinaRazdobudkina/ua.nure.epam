@@ -26,7 +26,7 @@ public class Journal implements Serializable {
 		if (now.compareTo(course.getStartDate()) < 0) {
 			status = -1;
 		} 
-		if (now.compareTo(course.getEndDate()) > 0) {
+		if (now.compareTo(course.getEndDate()) >= 0) {
 			status = 1;
 		}
 	}

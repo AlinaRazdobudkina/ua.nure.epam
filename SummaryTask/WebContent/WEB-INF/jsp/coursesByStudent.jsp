@@ -44,20 +44,22 @@
 
 
 		<c:forEach var="entryInJournal" items="${listCoursesStudent}">
+		<c:set var="pgogress" value="${entryInJournal.getProgressCourseInPercent()}" />
+		<c:set var="status" value="${entryInJournal.getStatus()}" />
 			<div class="card text-center">
 				<div class="card-header">${entryInJournal.getCourse().getCategoryName()}</div>
 				<div class="card-body">
-				<c:if test="${entryInJournal.getStatus() eq 0}">
+				<c:if test="${status eq 0}">
 					<div class="badge badge-success text-wrap float-right" style="width: 6rem;">
   						<fmt:message key="courses.label.statusProgress" />
 					</div>
 				</c:if>
-				<c:if test="${entryInJournal.getStatus() eq 1}">
+				<c:if test="${status eq 1}">
 					<div class="badge badge-danger text-wrap float-right" style="width: 6rem;">
   						<fmt:message key="courses.label.statusFinished" />
 					</div>
 				</c:if>
-				<c:if test="${entryInJournal.getStatus() eq -1}">
+				<c:if test="${status eq -1}">
 					<div class="badge badge-warning text-wrap float-right" style="width: 6rem;">
   						<fmt:message key="courses.label.statusNotStarted" />
 					</div>
@@ -87,14 +89,14 @@
 					<br>
 					<c:if test="${not empty user}">
 						<form>
-							<c:if test="${entryInJournal.getStatus() ne 1}">
+							<c:if test="${status ne 1}">
 								<div class="progress">
 									<div class="progress-bar bg-success" role="progressbar"
-										style="width: ${entryInJournal.getProgressCourseInPercent()}%" aria-valuenow=${course.getProgressCourseInPercent()} aria-valuemin="0"
-										aria-valuemax="100">${entryInJournal.getProgressCourseInPercent()}%</div>
+										style="width: ${pgogress}%" aria-valuenow=${course.getProgressCourseInPercent()} aria-valuemin="0"
+										aria-valuemax="100">${pgogress}%</div>
 								</div>
 							</c:if>
-							<c:if test="${entryInJournal.getStatus() eq 1}">
+							<c:if test="${status eq 1}">
 								<div class="progress-bar bg-danger" role="progressbar"
 									style="width: 100%" aria-valuenow="100" aria-valuemin="0"
 									aria-valuemax="100">100%</div>

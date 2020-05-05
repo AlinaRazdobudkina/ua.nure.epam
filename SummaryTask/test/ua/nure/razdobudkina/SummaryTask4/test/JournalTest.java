@@ -60,7 +60,7 @@ public class JournalTest {
 		course.setStartDate(LocalDate.of(2020, 5, 1));
 		course.setEndDate(LocalDate.of(2020, 5, 30));
 		journal.setCourse(course);
-		assertEquals(10, journal.getProgressCourseInPercent());
+		assertEquals(13, journal.getProgressCourseInPercent());
 		
 	}
 
