@@ -118,7 +118,6 @@ public final class DBManager {
 		try {
 			con = ds.getConnection();
 		} catch (SQLException ex) {
-			LOG.error(Messages.ERR_CANNOT_OBTAIN_CONNECTION, ex);
 			throw new DBException(Messages.ERR_CANNOT_OBTAIN_CONNECTION, ex);
 		}
 		return con;
