@@ -9,7 +9,7 @@
 <html lang="${language}">
 
 
-<jsp:useBean id="now" class="java.util.Date" />
+<title><fmt:message key="title.journal" /></title>
 <script src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="js/docs.min.js"></script>
@@ -39,53 +39,54 @@
 		</div>
 		<div class="d-inline p-2 float-right">
 
-			<label for="EndDate"><fmt:message key="courses.label.endDate" /></br> <input type="date"
-				class="float-right p-2" id="EndDate" value=${EndDate } readonly></label>
+			<label for="EndDate"><fmt:message key="courses.label.endDate" /></br>
+				<input type="date" class="float-right p-2" id="EndDate"
+				value=${EndDate } readonly></label>
 
 
 		</div>
 
-		<form name="form1" action="controller" method="post">
 
- 		<input type="hidden" name="result" value="" />
-			<table class="table table-striped">
-				<thead>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col"><fmt:message key="journal.label.student" /></th>
+					<th scope="col"><fmt:message key="users.label.phone" /></th>
+					<th scope="col"><fmt:message key="users.label.email" /></th>
+					<th scope="col"><fmt:message key="courses.label.rating" /></th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="entryInJournal" items="${journalForTeacher}" varStatus="counter">
+					<form name="form1" action="controller" method="post">
+
+						<input type="hidden" name="result" value="" /> <input
+							type="hidden" name="command" value="saveJournal" /> <input
+							type="hidden" name="user_id"
+							value="${entryInJournal.getUser().getId()}" /> <input
+							type="hidden" name="courseId" value="${courseId }" />
 					<tr>
-						<th scope="col">#</th>
-						<th scope="col"><fmt:message key="journal.label.student" /></th>
-						<th scope="col"><fmt:message key="users.label.phone" /></th>
-						<th scope="col"><fmt:message key="users.label.email" /></th>
-						<th scope="col"><fmt:message key="courses.label.rating" /></th>
+						<th scope="row">${counter.count}</th>
+						<td>${entryInJournal.getUser().getFullName()}</td>
+						<td>${entryInJournal.getUser().getPhone()}</td>
+						<td>${entryInJournal.getUser().getEmail()}</td>
+
+						<td>
+							<div class="changeRating">
+								<input type="number" id="rating" name="rating"
+									onchange="submit()" min=1 max=5
+									step=1 class="form-control"
+									value=${entryInJournal.getRating() }>
+							</div>
+						</td>
 					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="entryInJournal" items="${journalForTeacher}">
+					</form>
+				</c:forEach>
 
-						<input type="hidden" name="command" value="saveJournal" />
-						<input type="hidden" name="user_id"
-							value="${entryInJournal.getUser().getId()}" />
-						<input type="hidden" name="courseId" value="${courseId }" />
-						<tr>
-							<th scope="row">1</th>
-							<td>${entryInJournal.getUser().getFullName()}</td>
-							<td>${entryInJournal.getUser().getPhone()}</td>
-							<td>${entryInJournal.getUser().getEmail()}</td>
+			</tbody>
+		</table>
 
-							<td>
-								<div class="changeRating">
-									<input type="number" id="rating" name="rating"
-										onchange="javascript:document.form1.submit()" min=1 max=5
-										step=1 class="form-control"
-										value=${entryInJournal.getRating() }>
-								</div>
-							</td>
-						</tr>
-
-					</c:forEach>
-
-				</tbody>
-			</table>
-		</form>
 
 	</div>
 </body>

@@ -1,10 +1,18 @@
-<html>
 <%@ include file="/WEB-INF/jspf/head.jspf"%>
-<jsp:useBean id="now" class="java.util.Date" />
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="language"
+	value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
+	scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="ua.nure.razdobudkina.SummaryTask4.i18n.text" />
+
+<html lang="${language}">
+
 <script src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="js/docs.min.js"></script>
 
+<title><fmt:message key="title.editTeacher" /></title>
 <head>
 
 </head>
@@ -57,7 +65,7 @@
 						value="${user.getEmail()}" required>
 				</div>
 				<div class="form-group col-md-6">
-					<label for="inputPhone">Ph<fmt:message key="users.label.phone" />one</label> <input type="tel"
+					<label for="inputPhone"><fmt:message key="users.label.phone" /></label> <input type="tel"
 						class="form-control" id="inputPhone" name="phone"
 						value="${user.getPhone()}" required>
 				</div>

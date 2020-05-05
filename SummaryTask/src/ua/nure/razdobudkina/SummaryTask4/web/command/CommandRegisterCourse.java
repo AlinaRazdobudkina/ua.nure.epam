@@ -36,24 +36,27 @@ public class CommandRegisterCourse extends Command {
 		
 		HttpSession session = request.getSession();
 		
-		System.out.println(request.getParameter("course_id"));
+		System.out.println(request.getParameter("courseId"));
 		
-		int courseId = Integer.parseInt(request.getParameter("course_id"));
+		int courseId = Integer.parseInt(request.getParameter("courseId"));
 		
 		User user = (User) session.getAttribute("user");
 		
-		session.setAttribute("errorMessage", "");
-		session.setAttribute("result", "");
+		String result = "";
+		String errorMessage = "";
 		
 		DBManager manager = DBManager.getInstance();
 		
 		System.out.println(user.getId());
 		
 		if(manager.addCourseStudent(user.getId(), courseId)) {
-			session.setAttribute("result", "You have been successfully registered for the course");
+			result = "You have been successfully registered for the course";
+			forward += "&result=" + result;
 		}else {
-			session.setAttribute("errorMessage", "You have already registered for this course");
+			errorMessage = "You have already registered for this course";
+			forward += "&errorMessage=" + errorMessage;
 		}
+				
 		LOG.trace("Find student for a course and Insert in journal course with student ");
 		
 		LOG.debug("Command finished");

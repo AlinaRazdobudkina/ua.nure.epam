@@ -8,7 +8,7 @@
 
 <html lang="${language}">
 
-<jsp:useBean id="now" class="java.util.Date" />
+<title><fmt:message key="title.coursesByStudent" /></title>
 <script src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="js/docs.min.js"></script>
@@ -92,7 +92,7 @@
 							<c:if test="${status ne 1}">
 								<div class="progress">
 									<div class="progress-bar bg-success" role="progressbar"
-										style="width: ${pgogress}%" aria-valuenow=${course.getProgressCourseInPercent()} aria-valuemin="0"
+										style="width: ${pgogress}%" aria-valuenow="${course.getProgressCourseInPercent()}" aria-valuemin="0"
 										aria-valuemax="100">${pgogress}%</div>
 								</div>
 							</c:if>

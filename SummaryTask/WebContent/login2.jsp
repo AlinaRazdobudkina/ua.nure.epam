@@ -9,6 +9,8 @@
 
 <html lang="${language}">
 
+<title><fmt:message key="title.login" /></title>
+
 <%@ include file="/WEB-INF/jspf/head.jspf"%>
 <script src="js/jquery.min.js"></script>
 <link rel="stylesheet" href="style/bootstrap.min.css" type="text/css" />

@@ -1,4 +1,5 @@
 <%@ include file="/WEB-INF/jspf/head.jspf"%>
+
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="language"
 	value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
@@ -8,6 +9,7 @@
 
 <html lang="${language}">
 
+<title><fmt:message key="title.allCourses" /></title>
 
 <script src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>

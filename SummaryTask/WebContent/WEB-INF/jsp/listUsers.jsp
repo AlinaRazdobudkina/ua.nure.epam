@@ -8,6 +8,7 @@
 
 <html lang="${language}">
 
+<title><fmt:message key="title.listUsers" /></title>
 <script src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="js/docs.min.js"></script>

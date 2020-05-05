@@ -88,7 +88,7 @@ public final class DBManager {
 
 	private static final String SQL_GET_ALL_COURSES = "SELECT * FROM courses";
 
-	private static final String SQL_GET_ALL_COURSES_WITH_NAMES = "SELECT courses.*,"
+	private static final String SQL_GET_ALL_COURSES_WITH_NAMES = "SELECT DISTINCT courses.*,"
 			+ " (SELECT COUNT(course_id) from journal WHERE journal.course_id = courses.id) AS countStudents, "
 			+ "categories.name AS categoryName,"
 			+ " CONCAT(users.first_name,CONCAT(CHAR(194),CHAR(160)),users.last_name) AS teacherName FROM courses"

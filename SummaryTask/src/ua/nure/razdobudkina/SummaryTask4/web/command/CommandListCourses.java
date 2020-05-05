@@ -99,8 +99,13 @@ public class CommandListCourses extends Command {
 		request.setAttribute("listTeachers", listTeachers);
 		
 		String result = request.getParameter("result");
+		String errorMessage = request.getParameter("errorMessage");
+		System.out.println(result);
 		if (result != null) {
 			request.setAttribute("result", result);
+		}
+		if (errorMessage != null) {
+			request.setAttribute("errorMessage", errorMessage);
 		}
 
 		String sorted = request.getParameter("sorted");
