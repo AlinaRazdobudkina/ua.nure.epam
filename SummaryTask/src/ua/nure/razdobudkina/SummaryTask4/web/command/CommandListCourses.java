@@ -12,11 +12,13 @@ import org.apache.log4j.Logger;
 
 import ua.nure.razdobudkina.SummaryTask4.Path;
 import ua.nure.razdobudkina.SummaryTask4.db.DBManager;
+import ua.nure.razdobudkina.SummaryTask4.db.DBManagerForTest;
 import ua.nure.razdobudkina.SummaryTask4.db.Role;
 import ua.nure.razdobudkina.SummaryTask4.db.bean.CourseExtend;
 import ua.nure.razdobudkina.SummaryTask4.db.entity.Category;
 import ua.nure.razdobudkina.SummaryTask4.db.entity.User;
 import ua.nure.razdobudkina.SummaryTask4.exception.AppException;
+import ua.nure.razdobudkina.SummaryTask4.exception.DBException;
 
 public class CommandListCourses extends Command {
 

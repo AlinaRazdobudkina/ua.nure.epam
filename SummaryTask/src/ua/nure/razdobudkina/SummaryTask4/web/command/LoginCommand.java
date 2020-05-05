@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 
 import ua.nure.razdobudkina.SummaryTask4.Path;
 import ua.nure.razdobudkina.SummaryTask4.db.DBManager;
+import ua.nure.razdobudkina.SummaryTask4.db.DBManagerForTest;
 import ua.nure.razdobudkina.SummaryTask4.db.Role;
 import ua.nure.razdobudkina.SummaryTask4.db.entity.Course;
 import ua.nure.razdobudkina.SummaryTask4.db.entity.User;
@@ -34,9 +35,10 @@ public class LoginCommand extends Command {
 			throws IOException, ServletException, AppException {
 		LOG.debug("Command starts");
 
-		HttpSession session = request.getSession();
-
 		DBManager manager = DBManager.getInstance();
+		
+		HttpSession session = request.getSession();
+		
 		String login = request.getParameter("login");
 		LOG.trace("Request parameter: login --> " + login);
 
@@ -56,7 +58,6 @@ public class LoginCommand extends Command {
 		Role userRole = Role.getRole(user);
 		LOG.trace("userRole --> " + userRole);
 
-		manager = DBManager.getInstance();
 		List<Course> listCourse = manager.allCourses();
 		LOG.trace("Found in DB: list courses --> " + listCourse);
 

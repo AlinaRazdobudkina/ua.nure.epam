@@ -60,7 +60,7 @@
 				<div class="form-group col-md-6">
 					<label for="inputStartDate"><fmt:message key="courses.label.startDate" /></label>
 					<c:if test="${preCommand == 'add' }">
-					 <input type="date" min=${nowPlusDay } class="form-control" id="inputStartDate"
+					 <input type="date" min="${nowPlusDay }" class="form-control" id="inputStartDate"
 						name="startDate" value="${startDate }" required>
 					</c:if>
 					<c:if test="${preCommand == 'update' }">

@@ -1,6 +1,7 @@
 <%@ include file="/WEB-INF/jspf/head.jspf"%>
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="WEB-INF/sumDate.tld" prefix="m" %>  
 <c:set var="language"
 	value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
 	scope="session" />

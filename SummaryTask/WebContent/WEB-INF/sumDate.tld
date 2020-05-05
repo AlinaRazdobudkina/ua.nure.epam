@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="https://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://java.sun.com/xml/ns/j2ee https://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+    version="2.0">
+<description>Sum Date and Days</description>
+<tlib-version>2.1</tlib-version>
+<short-name>mytags</short-name>
+<uri>http://tomcat.apache.org/example-taglib</uri>
+<tag>
+	<name>sumDate</name>
+	<tag-class>ua.nure.razdobudkina.SummaryTask4.customtags.SumDateTags</tag-class>
+	<body-content>empty</body-content>
+	<attribute>
+	<name>countDays</name>
+	<required>true</required>
+	</attribute>
+</tag>
+</taglib>

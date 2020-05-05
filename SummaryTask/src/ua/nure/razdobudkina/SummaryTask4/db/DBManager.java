@@ -1,5 +1,6 @@
 package ua.nure.razdobudkina.SummaryTask4.db;
 
+import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -25,13 +26,12 @@ import ua.nure.razdobudkina.SummaryTask4.exception.DBException;
 import ua.nure.razdobudkina.SummaryTask4.exception.Messages;
 
 /**
- * DB manager. Works with Apache Derby DB. Only the required DAO methods are
- * defined!
+ * DB manager
  * 
  * @author A.Razdobudkina
  * 
  */
-public final class DBManager {
+public class DBManager {
 
 	private static final Logger LOG = Logger.getLogger(DBManager.class);
 
@@ -51,7 +51,9 @@ public final class DBManager {
 	private DBManager() throws DBException {
 		try {
 			Context initContext = new InitialContext();
+			System.out.println(initContext);
 			Context envContext = (Context) initContext.lookup("java:/comp/env");
+			System.out.println(envContext);
 			ds = (DataSource) envContext.lookup("jdbc/ST4DB");
 			LOG.trace("Data source ==> " + ds);
 		} catch (NamingException ex) {

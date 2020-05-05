@@ -34,6 +34,8 @@ public class CommandChangeLanguage extends Command {
 
 		LOG.debug("Command finished");
 		return forward;
+		
+		
 	}
 
 	
