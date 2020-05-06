@@ -51,7 +51,7 @@ public class Journal implements Serializable {
 		return rating;
 	}
 
-	public void setRating(int rating) {
+	public void setRating(int rating) { 
 		this.rating = rating;
 	}
 
