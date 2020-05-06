@@ -43,6 +43,7 @@ public class LoginCommand extends Command {
 		LOG.trace("Request parameter: login --> " + login);
 
 		String password = request.getParameter("password");
+		LOG.trace("Request parameter: password");
 		if (login == null || password == null || login.isEmpty() || password.isEmpty()) {
 			throw new AppException("Login/password cannot be empty");
 		}

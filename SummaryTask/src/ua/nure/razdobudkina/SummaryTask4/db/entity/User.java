@@ -1,5 +1,7 @@
 package ua.nure.razdobudkina.SummaryTask4.db.entity;
 
+import ua.nure.razdobudkina.SummaryTask4.db.Role;
+
 /**
  * User entity.
  * 
@@ -9,23 +11,47 @@ package ua.nure.razdobudkina.SummaryTask4.db.entity;
 public class User extends Entity {
 
 	private static final long serialVersionUID = -6889036256149495388L;
-	
+
 	private String login;
-	
+
 	private String password;
-	
+
 	private String firstName;
-	
+
 	private String phone;
-	
+
 	private String email;
-	
+
 	private String lastName;
 
 	private boolean active;
-	
+
 	private int roleId;
-	
+
+	private int countOfCourse;
+
+	private int avgRating;
+
+	public int getCountOfCourse() {
+		return countOfCourse;
+	}
+
+	public void setCountOfCourse(int countOfCourse) {
+		if (roleId == Role.STUDENT.ordinal()) {
+			this.countOfCourse = countOfCourse;
+		}
+	}
+
+	public int getAvgRating() {
+		return avgRating;
+	}
+
+	public void setAvgRating(int avgRating) {
+		if (roleId == Role.STUDENT.ordinal()) {
+			this.avgRating = avgRating;
+		}
+	}
+
 	public String getPhone() {
 		return phone;
 	}
@@ -69,7 +95,7 @@ public class User extends Entity {
 	public String getFirstName() {
 		return firstName;
 	}
-	
+
 	public String getFullName() {
 		return (firstName + "\u00A0" + lastName);
 	}
@@ -85,7 +111,7 @@ public class User extends Entity {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
+
 	public int getRoleId() {
 		return roleId;
 	}
@@ -96,14 +122,9 @@ public class User extends Entity {
 
 	@Override
 	public String toString() {
-		return "User [login=" + login
-				+ ", firstName=" + firstName
-				+ ", phone=" + phone
-				+ ", email=" + email
-				+ ", lastName=" + lastName
-				+ ", active=" + active
-				+ ", roleId=" + roleId + "]";
+		return "User [login=" + login + ", password=" + password + ", firstName=" + firstName + ", phone=" + phone
+				+ ", email=" + email + ", lastName=" + lastName + ", active=" + active + ", roleId=" + roleId
+				+ ", countOfCourse=" + countOfCourse + ", avgRating=" + avgRating + "]";
 	}
 
-	
 }

@@ -35,7 +35,7 @@ public class CommandListUsers extends Command {
 			listUsers = manager.allUsersForRole(Role.TEACHER.ordinal());
 			LOG.trace("Found in DB: list students --> " + listUsers);
 		}else {
-			listUsers = manager.allUsersForRole(Role.STUDENT.ordinal());
+			listUsers = manager.allUsersForRoleExtend(Role.STUDENT.ordinal());
 			LOG.trace("Found in DB: list teachers --> " + listUsers);
 		}
 		

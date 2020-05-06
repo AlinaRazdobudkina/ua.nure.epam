@@ -45,6 +45,8 @@
 						<th scope="col"><fmt:message key="users.label.phone" /></th>
 						<th scope="col"><fmt:message key="users.label.email" /></th>
 						<c:if test="${preCommand == 'students'}">
+							<th scope="col">Count of courses</th>
+							<th scope="col">Avg rating</th>
 							<th scope="col"><fmt:message key="users.label.active" /></th>
 						</c:if>
 					</tr>
@@ -61,6 +63,8 @@
 							<td>${user.getPhone()}</td>
 							<td>${user.getEmail()}</td>
 							<c:if test="${preCommand == 'students'}">
+								<td>${user.getCountOfCourse()}</td>
+								<td>${user.getAvgRating()}</td>
 								<td>
 									<div class="custom-control custom-switch">
 										<c:if test="${user.isActive()}">

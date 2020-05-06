@@ -1,7 +1,6 @@
 package ua.nure.razdobudkina.SummaryTask4.test.command;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,11 +15,10 @@ import ua.nure.razdobudkina.SummaryTask4.db.entity.User;
 import ua.nure.razdobudkina.SummaryTask4.exception.AppException;
 import ua.nure.razdobudkina.SummaryTask4.web.command.LoginCommand;
 
-
 public class LoginCommandTest extends Mockito {
 
 	@Test
-	public void executeTest() throws IOException, ServletException, AppException {
+	public void testExecute() throws IOException, ServletException, AppException {
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		HttpServletResponse response = mock(HttpServletResponse.class);
 		HttpSession session = mock(HttpSession.class);

@@ -64,12 +64,13 @@ public class Journal implements Serializable {
 		Period period = Period.between(now, endDate);
 		int diffAll = period.getDays();
 
+		System.out.println(diffAll);
 		period = Period.between(startDate, now);
 		int difftoday = period.getDays();
 		
 		diffAll += difftoday;
 
-		if (difftoday < 1) {
+		if (diffAll < 1) {
 			return 0;
 		}
 

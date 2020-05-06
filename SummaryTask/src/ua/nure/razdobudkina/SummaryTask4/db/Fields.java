@@ -19,6 +19,8 @@ public final class Fields {
 	public static final String USER_EMAIL = "email";
 	public static final String USER_ACTIVE = "active";
 	public static final String USER_ROLE_ID = "role_id";
+	public static final String USER_COUNT_OF_COURSES = "countCourses";
+	public static final String USER_AVG_RATING = "avgRating";
 	
 	public static final String COURSE_NAME = "name";
 	public static final String COURSE_START_DATE = "start_date";

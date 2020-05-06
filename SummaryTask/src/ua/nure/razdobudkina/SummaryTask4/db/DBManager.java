@@ -112,6 +112,11 @@ public class DBManager {
 	private static final String SQL_GET_ALL_CATEGORIES = "SELECT * FROM categories";
 
 	private static final String SQL_USERS_FOR_ROLE = "SELECT * FROM users WHERE role_id=?";
+	
+	private static final String SQL_LIST_STUDENTS_EXTEND = "SELECT DISTINCT users.*,"
+			+ " (SELECT COUNT(course_id) from journal WHERE journal.user_id = users.id) AS countCourses, "
+			+ "(SELECT ROUND(AVG(journal.rating)) from journal WHERE journal.user_id = users.id AND journal.rating != 0) AS avgRating "
+			+ "FROM users WHERE role_id=?";
 
 	private static final String SQL_UPDATE_STATUS_USER = "UPDATE users SET active=? WHERE id=?";
 
@@ -499,13 +504,16 @@ public class DBManager {
 	 * 
 	 * @param CourseExtend course,
 	 * @throws DBException
+	 * @throws SQLException 
 	 */
 	public void updateCourse(Course course) throws DBException {
 		Connection con = null;
 		try {
 			con = getConnection();
 			updateCourse(con, course);
+			con.commit();
 		} catch (SQLException ex) {
+			rollback(con);
 			throw new DBException(Messages.ERR_CANNOT_UPDATE_COURSE, ex);
 		} finally {
 			close(con);
@@ -517,13 +525,16 @@ public class DBManager {
 	 * 
 	 * @param CourseExtend course,
 	 * @throws DBException
+	 * @throws SQLException 
 	 */
 	public void addCourse(Course course) throws DBException {
 		Connection con = null;
 		try {
 			con = getConnection();
 			updateCourse(con, course);
+			con.commit();
 		} catch (SQLException ex) {
+			rollback(con);
 			throw new DBException(Messages.ERR_CANNOT_ADD_COURSE, ex);
 		} finally {
 			close(con);
@@ -535,6 +546,7 @@ public class DBManager {
 	 * 
 	 * @param CourseExtend course,
 	 * @throws DBException
+	 * @throws SQLException 
 	 */
 	public void deleteCourse(int courseId) throws DBException {
 		Connection con = null;
@@ -544,7 +556,9 @@ public class DBManager {
 			pstmt = con.prepareStatement(SQL_DELETE_COURSE);
 			pstmt.setInt(1, courseId);
 			pstmt.executeUpdate();
+			con.commit();
 		} catch (SQLException ex) {
+			rollback(con);
 			throw new DBException(Messages.ERR_CANNOT_DELETE_COURSE, ex);
 		} finally {
 			close(con);
@@ -556,6 +570,7 @@ public class DBManager {
 	 * 
 	 * @return List<Category> list Course entity
 	 * @throws DBException
+	 * @throws SQLException 
 	 */
 	public List<Category> allCategories() throws DBException {
 		List<Category> categorieslList = new ArrayList<>();
@@ -569,7 +584,9 @@ public class DBManager {
 			while (rs.next()) {
 				categorieslList.add(extractCategory(rs));
 			}
+			con.commit();
 		} catch (SQLException ex) {
+			rollback(con);
 			throw new DBException(Messages.ERR_CANNOT_OBTAIN_CATEGORIES, ex);
 		} finally {
 			close(con, stmt, rs);
@@ -583,6 +600,7 @@ public class DBManager {
 	 * @param id roleId identifier
 	 * @return List<User> list User entity
 	 * @throws DBException
+	 * @throws SQLException 
 	 */
 	public List<User> allUsersForRole(int roleId) throws DBException {
 		List<User> userlList = new ArrayList<>();
@@ -597,7 +615,34 @@ public class DBManager {
 			while (rs.next()) {
 				userlList.add(extractUser(rs));
 			}
+			con.commit();
 		} catch (SQLException ex) {
+			rollback(con);
+			throw new DBException(Messages.ERR_CANNOT_OBTAIN_COURSES_FOR_ROLE, ex);
+		} finally {
+			close(con, pstmt, rs);
+		}
+		return userlList;
+	}
+	
+
+	public List<User> allUsersForRoleExtend(int roleId) throws DBException {
+		List<User> userlList = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Connection con = null;
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement(SQL_LIST_STUDENTS_EXTEND);
+			pstmt.setInt(1, roleId);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				User user = (extractUser(rs));
+				userlList.add(extractUserExtend(rs,user));
+			}
+			con.commit();
+		} catch (SQLException ex) {
+			rollback(con);
 			throw new DBException(Messages.ERR_CANNOT_OBTAIN_COURSES_FOR_ROLE, ex);
 		} finally {
 			close(con, pstmt, rs);
@@ -750,6 +795,13 @@ public class DBManager {
 		user.setEmail(rs.getString(Fields.USER_EMAIL));
 		user.setActive(rs.getBoolean(Fields.USER_ACTIVE));
 		user.setRoleId(rs.getInt(Fields.USER_ROLE_ID));
+		return user;
+	}
+	
+	private User extractUserExtend(ResultSet rs,User user) throws SQLException {
+		user.setCountOfCourse(rs.getInt(Fields.USER_COUNT_OF_COURSES));
+		user.setAvgRating(rs.getInt(Fields.USER_AVG_RATING));
+		System.out.println(user);
 		return user;
 	}
 
